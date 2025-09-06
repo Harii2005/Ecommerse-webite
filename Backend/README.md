@@ -1,15 +1,19 @@
 # Ecommerce Backend API Documentation
 
 ## Overview
+
 This is a RESTful API for an ecommerce website built with Express.js and MongoDB. It provides authentication, item management, and cart functionality.
 
 ## Base URL
+
 ```
 http://localhost:8080/api
 ```
 
 ## Authentication
+
 Most endpoints require authentication using JWT tokens. Include the token in the Authorization header:
+
 ```
 Authorization: Bearer <your-jwt-token>
 ```
@@ -19,9 +23,11 @@ Authorization: Bearer <your-jwt-token>
 ### Authentication Routes (`/api/auth`)
 
 #### 1. Register User
+
 - **POST** `/api/auth/signup`
 - **Description**: Register a new user
 - **Body**:
+
 ```json
 {
   "name": "John Doe",
@@ -30,7 +36,9 @@ Authorization: Bearer <your-jwt-token>
   "role": "user" // optional, defaults to "user"
 }
 ```
+
 - **Response**:
+
 ```json
 {
   "success": true,
@@ -48,22 +56,27 @@ Authorization: Bearer <your-jwt-token>
 ```
 
 #### 2. Login User
+
 - **POST** `/api/auth/login`
 - **Description**: Login existing user
 - **Body**:
+
 ```json
 {
   "email": "john@example.com",
   "password": "password123"
 }
 ```
+
 - **Response**: Same as register
 
 #### 3. Get Profile
+
 - **GET** `/api/auth/profile`
 - **Description**: Get current user profile
 - **Auth**: Required
 - **Response**:
+
 ```json
 {
   "success": true,
@@ -82,6 +95,7 @@ Authorization: Bearer <your-jwt-token>
 ### Item Routes (`/api/items`)
 
 #### 1. Get All Items
+
 - **GET** `/api/items`
 - **Description**: Get all items with optional filters
 - **Query Parameters**:
@@ -96,14 +110,17 @@ Authorization: Bearer <your-jwt-token>
 - **Example**: `/api/items?category=electronics&minPrice=100&maxPrice=1000&page=1&limit=5`
 
 #### 2. Get Single Item
+
 - **GET** `/api/items/:id`
 - **Description**: Get item by ID
 
 #### 3. Create Item (Admin Only)
+
 - **POST** `/api/items`
 - **Description**: Create new item
 - **Auth**: Required (Admin only)
 - **Body**:
+
 ```json
 {
   "name": "iPhone 14",
@@ -118,12 +135,14 @@ Authorization: Bearer <your-jwt-token>
 ```
 
 #### 4. Update Item (Admin Only)
+
 - **PUT** `/api/items/:id`
 - **Description**: Update existing item
 - **Auth**: Required (Admin only)
 - **Body**: Same as create (all fields optional)
 
 #### 5. Delete Item (Admin Only)
+
 - **DELETE** `/api/items/:id`
 - **Description**: Delete item
 - **Auth**: Required (Admin only)
@@ -131,10 +150,12 @@ Authorization: Bearer <your-jwt-token>
 ### Cart Routes (`/api/cart`)
 
 #### 1. Add to Cart
+
 - **POST** `/api/cart`
 - **Description**: Add item to user's cart
 - **Auth**: Required
 - **Body**:
+
 ```json
 {
   "itemId": "item_id",
@@ -143,15 +164,18 @@ Authorization: Bearer <your-jwt-token>
 ```
 
 #### 2. Get Cart
+
 - **GET** `/api/cart`
 - **Description**: Get user's cart
 - **Auth**: Required
 
 #### 3. Update Cart Item
+
 - **PUT** `/api/cart/:itemId`
 - **Description**: Update item quantity in cart
 - **Auth**: Required
 - **Body**:
+
 ```json
 {
   "quantity": 3
@@ -159,17 +183,21 @@ Authorization: Bearer <your-jwt-token>
 ```
 
 #### 4. Remove from Cart
+
 - **DELETE** `/api/cart/:itemId`
 - **Description**: Remove item from cart
 - **Auth**: Required
 
 #### 5. Clear Cart
+
 - **DELETE** `/api/cart`
 - **Description**: Clear entire cart
 - **Auth**: Required
 
 ## Error Responses
+
 All endpoints return errors in the following format:
+
 ```json
 {
   "success": false,
@@ -179,6 +207,7 @@ All endpoints return errors in the following format:
 ```
 
 ## Status Codes
+
 - `200`: Success
 - `201`: Created
 - `400`: Bad Request
@@ -188,15 +217,19 @@ All endpoints return errors in the following format:
 - `500`: Internal Server Error
 
 ## Sample Data
+
 The API includes sample data that can be seeded using:
+
 - **POST** `/api/seed` (Development only)
 
 ### Sample Users:
+
 - Admin: `admin@ecommerce.com` / `admin123`
 - User: `john@example.com` / `user123`
 - User: `jane@example.com` / `user123`
 
 ### Categories Available:
+
 - electronics
 - clothing
 - books
@@ -209,9 +242,11 @@ The API includes sample data that can be seeded using:
 ## Development Endpoints
 
 ### Health Check
+
 - **GET** `/api/health`
 - **Description**: Check if server is running
 
 ### Seed Database
+
 - **POST** `/api/seed`
 - **Description**: Populate database with sample data (development only)
