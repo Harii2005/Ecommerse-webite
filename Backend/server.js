@@ -19,6 +19,7 @@ app.use(
   cors({
     origin: [
       process.env.FRONTEND_URL || "http://localhost:3000",
+      "https://ecommerse-website-frontend.onrender.com",
       "https://ecommerse-webite.onrender.com",
       "https://ecommerse-webiteee.onrender.com",
     ],
