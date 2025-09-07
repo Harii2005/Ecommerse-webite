@@ -1,13 +1,7 @@
 import axios from "axios";
 
 // Create axios instance with base configuration
-const api = axios.create({
-  baseURL: "https://ecommerse-webiteee.onrender.com/api",
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+const API_BASE_URL = "https://ecommerse-webite-backendd.onrender.com/api";
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
