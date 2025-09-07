@@ -8,4 +8,15 @@ export default defineConfig({
     port: 3000,
     open: true,
   },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    // Copy _redirects file to dist folder for Render deployment
+    rollupOptions: {
+      input: {
+        main: './index.html'
+      }
+    }
+  },
+  publicDir: 'public'
 });
