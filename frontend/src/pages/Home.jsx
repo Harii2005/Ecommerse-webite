@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
+import TestApi from "../components/TestApi";
 import itemsService from "../services/itemsService";
 import "./Home.css";
 
@@ -25,17 +26,26 @@ const Home = () => {
   const fetchFeaturedProducts = async () => {
     try {
       setLoading(true);
+      setError(null);
+      
       const response = await itemsService.getItems({
         limit: 8,
         sortBy: "rating",
         sortOrder: "desc",
       });
 
-      if (response.success) {
-        setProducts(response.data.items);
+      console.log("API Response:", response);
+
+      if (response && response.success) {
+        setProducts(response.data.items || []);
+        console.log("Products loaded successfully:", response.data.items?.length || 0, "items");
+      } else {
+        console.error("API response structure unexpected:", response);
+        setError("Failed to load products");
       }
     } catch (error) {
-      setError(error.message || "Failed to fetch products");
+      console.error("Error fetching products:", error);
+      setError("Failed to connect to server. Please check your internet connection.");
     } finally {
       setLoading(false);
     }
@@ -67,6 +77,9 @@ const Home = () => {
 
   return (
     <div className="home">
+      {/* Test API Component */}
+      <TestApi />
+      
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">

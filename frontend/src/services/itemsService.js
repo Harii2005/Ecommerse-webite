@@ -22,6 +22,7 @@ export const itemsService = {
       );
       return response;
     } catch (error) {
+      console.error("ItemsService API Error:", error);
       throw error;
     }
   },

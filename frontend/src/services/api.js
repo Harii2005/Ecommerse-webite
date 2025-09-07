@@ -1,11 +1,8 @@
 import axios from "axios";
 
-// Use production backend for all environments
-const API_BASE_URL = "https://ecommerse-webite-backendd.onrender.com/api";
-
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: "https://ecommerse-webite-backendd.onrender.com/api",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
