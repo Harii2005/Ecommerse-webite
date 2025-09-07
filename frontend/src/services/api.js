@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// Determine the API base URL based on environment
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+// Use production backend for all environments
+const API_BASE_URL = "https://ecommerse-webite-backendd.onrender.com/api";
 
 // Create axios instance with base configuration
 const api = axios.create({
