@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
-import TestApi from "../components/TestApi";
 import itemsService from "../services/itemsService";
 import "./Home.css";
 
@@ -77,9 +76,6 @@ const Home = () => {
 
   return (
     <div className="home">
-      {/* Test API Component */}
-      <TestApi />
-      
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
