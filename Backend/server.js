@@ -20,6 +20,7 @@ app.use(
     origin: [
       process.env.FRONTEND_URL || "http://localhost:3000",
       "https://ecommerse-webite.onrender.com",
+      "https://ecommerse-webiteee.onrender.com",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
