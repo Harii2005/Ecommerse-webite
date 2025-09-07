@@ -3,6 +3,11 @@ import axios from "axios";
 // Create axios instance with base configuration
 const API_BASE_URL = "https://ecommerse-webite-backendd.onrender.com/api";
 
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 10000,
+});
+
 // Request interceptor to add auth token
 api.interceptors.request.use(
   (config) => {
