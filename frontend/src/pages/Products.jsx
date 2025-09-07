@@ -24,19 +24,54 @@ const Products = () => {
     limit: parseInt(searchParams.get("limit")) || 12,
   });
 
-  const categories = ["electronics", "clothing", "books", "home", "sports"];
+  const categories = [
+    "electronics",
+    "clothing",
+    "books",
+    "home",
+    "sports",
+    "beauty",
+    "toys",
+    "food",
+  ];
+
+  useEffect(() => {
+    // Update filters when searchParams change
+    setFilters({
+      category: searchParams.get("category") || "",
+      minPrice: searchParams.get("minPrice") || "",
+      maxPrice: searchParams.get("maxPrice") || "",
+      search: searchParams.get("search") || "",
+      sortBy: searchParams.get("sortBy") || "name",
+      sortOrder: searchParams.get("sortOrder") || "asc",
+      page: parseInt(searchParams.get("page")) || 1,
+      limit: parseInt(searchParams.get("limit")) || 12,
+    });
+  }, [searchParams]);
 
   useEffect(() => {
     fetchProducts();
-  }, [searchParams]);
+  }, [searchParams]); // Changed dependency to searchParams instead of filters
 
   const fetchProducts = async () => {
     try {
       setLoading(true);
       setError(null);
 
+      // Get current filters from URL parameters
+      const currentFilters = {
+        category: searchParams.get("category") || "",
+        minPrice: searchParams.get("minPrice") || "",
+        maxPrice: searchParams.get("maxPrice") || "",
+        search: searchParams.get("search") || "",
+        sortBy: searchParams.get("sortBy") || "name",
+        sortOrder: searchParams.get("sortOrder") || "asc",
+        page: parseInt(searchParams.get("page")) || 1,
+        limit: parseInt(searchParams.get("limit")) || 12,
+      };
+
       const queryParams = new URLSearchParams();
-      Object.entries(filters).forEach(([key, value]) => {
+      Object.entries(currentFilters).forEach(([key, value]) => {
         if (value) queryParams.append(key, value);
       });
 

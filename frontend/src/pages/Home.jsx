@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import itemsService from "../services/itemsService";
 import "./Home.css";
@@ -26,7 +27,7 @@ const Home = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const response = await itemsService.getItems({
         limit: 8,
         sortBy: "rating",
@@ -37,14 +38,20 @@ const Home = () => {
 
       if (response && response.success) {
         setProducts(response.data.items || []);
-        console.log("Products loaded successfully:", response.data.items?.length || 0, "items");
+        console.log(
+          "Products loaded successfully:",
+          response.data.items?.length || 0,
+          "items"
+        );
       } else {
         console.error("API response structure unexpected:", response);
         setError("Failed to load products");
       }
     } catch (error) {
       console.error("Error fetching products:", error);
-      setError("Failed to connect to server. Please check your internet connection.");
+      setError(
+        "Failed to connect to server. Please check your internet connection."
+      );
     } finally {
       setLoading(false);
     }
@@ -81,9 +88,9 @@ const Home = () => {
         <div className="hero-content">
           <h1>Welcome to EcomStore</h1>
           <p>Discover amazing products at unbeatable prices</p>
-          <a href="/products" className="cta-button">
+          <Link to="/products" className="cta-button">
             Shop Now
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -93,14 +100,14 @@ const Home = () => {
           <h2>Shop by Category</h2>
           <div className="categories-grid">
             {categories.map((category) => (
-              <a
+              <Link
                 key={category}
-                href={`/products?category=${category}`}
+                to={`/products?category=${category}`}
                 className="category-card"
               >
                 <div className="category-icon">{getCategoryIcon(category)}</div>
                 <h3>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -116,9 +123,9 @@ const Home = () => {
             ))}
           </div>
           <div className="view-all-container">
-            <a href="/products" className="view-all-button">
+            <Link to="/products" className="view-all-button">
               View All Products
-            </a>
+            </Link>
           </div>
         </div>
       </section>
