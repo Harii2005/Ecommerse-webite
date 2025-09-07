@@ -84,21 +84,29 @@ export const AuthProvider = ({ children }) => {
       dispatch({ type: "SET_LOADING", payload: true });
       dispatch({ type: "CLEAR_ERROR" });
 
+      console.log("AuthContext: Attempting login with:", credentials.email);
       const response = await authService.login(credentials);
+      console.log("AuthContext: Login response:", response);
 
       if (response.success) {
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: response.data,
         });
+        console.log("AuthContext: Login successful, user:", response.data.user);
         return response;
+      } else {
+        throw new Error(response.message || "Login failed");
       }
     } catch (error) {
+      console.error("AuthContext: Login error:", error);
       dispatch({
         type: "SET_ERROR",
         payload: error.message || "Login failed",
       });
       throw error;
+    } finally {
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   };
 
@@ -116,6 +124,8 @@ export const AuthProvider = ({ children }) => {
           payload: response.data,
         });
         return response;
+      } else {
+        throw new Error(response.message || "Registration failed");
       }
     } catch (error) {
       dispatch({
@@ -123,6 +133,8 @@ export const AuthProvider = ({ children }) => {
         payload: error.message || "Registration failed",
       });
       throw error;
+    } finally {
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   };
 

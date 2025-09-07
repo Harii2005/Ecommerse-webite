@@ -34,9 +34,17 @@ const Login = () => {
 
     try {
       setIsLoading(true);
+      console.log("Login component: Starting login process");
+      console.log("Login component: Form data:", {
+        email: formData.email,
+        password: "***",
+      });
       await login(formData);
+      console.log("Login component: Login successful, navigating to /");
       navigate("/");
     } catch (error) {
+      console.error("Login component: Login failed:", error);
+      alert("Login failed: " + (error.message || "Unknown error"));
       // Error is handled by context
     } finally {
       setIsLoading(false);

@@ -18,13 +18,22 @@ export const authService = {
   // Login user
   login: async (credentials) => {
     try {
+      console.log("AuthService: Making login request to:", "/auth/login");
+      console.log("AuthService: Login credentials:", {
+        email: credentials.email,
+      });
+
       const response = await api.post("/auth/login", credentials);
+      console.log("AuthService: Login API response:", response);
+
       if (response.success && response.data.token) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
+        console.log("AuthService: Token and user saved to localStorage");
       }
       return response;
     } catch (error) {
+      console.error("AuthService: Login error:", error);
       throw error;
     }
   },
